@@ -1,0 +1,22 @@
+FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3-pip \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY pyproject.toml ./
+RUN pip install --no-cache-dir uv && \
+    uv pip install --system --no-cache .
+
+COPY app/ ./app/
+
+ENV PYTHONUNBUFFERED=1
+ENV ENVIRONMENT=production
+ENV CUDA_VISIBLE_DEVICES=0
+
+CMD ["celery", "-A", "app.tasks.celery_app", "worker", "--loglevel=info", "--concurrency=1", "-Q", "gpu-high,gpu-normal,gpu-low"]
