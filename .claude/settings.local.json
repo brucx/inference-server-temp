@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(make:*)",
+      "Bash(python:*)",
+      "Bash(ls:*)",
+      "Bash(chmod:*)",
+      "Bash(./check_make.sh)",
+      "Bash(source:*)",
+      "Bash(pytest:*)"
     ],
     "deny": []
   }
