@@ -49,9 +49,19 @@ A production-ready FastAPI + Celery based GPU inference server for long-running 
 # Install uv if not already installed
 pip install uv
 
-# Install project dependencies
-uv pip sync
+# Create virtual environment
+uv venv
+
+# Activate virtual environment
+source .venv/bin/activate  # On Linux/macOS
+# Or on Windows:
+# .venv\Scripts\activate
+
+# Install project dependencies with dev extras
 uv pip install -e ".[dev]"
+
+# Alternatively, install to system Python (not recommended)
+# uv pip install --system -e ".[dev]"
 ```
 
 2. Set up environment:
